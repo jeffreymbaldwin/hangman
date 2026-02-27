@@ -3,8 +3,12 @@ require_relative 'lib/Game'
 game = Game.new
 
 
-#secret maker is done and now returns 1 word as a string
-#it is connected to game and the secret can be returned from game.
-
-#Next let's do the logic for getting a letter from player 
-#And handing that off to Game. 
+#secret maker and getting guess are done. 
+#I need to tackle display
+#I need to tackle game comparing guess to answer. 
+#
+#I think I wanna do display last?
+#Let's use live for the game.
+#game will keep track of it
+#these lives will directly affect what display displays.
+#
