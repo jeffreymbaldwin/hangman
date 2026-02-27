@@ -3,9 +3,8 @@ require_relative 'lib/Game'
 game = Game.new
 
 
-#we are working on secret maker. 
-#I have it changed to an array
-#now I need to chomp it
-#and get rid of the words i dont want
-#then I will take that result and randomize one word for 
-#the secret
+#secret maker is done and now returns 1 word as a string
+#it is connected to game and the secret can be returned from game.
+
+#Next let's do the logic for getting a letter from player 
+#And handing that off to Game. 

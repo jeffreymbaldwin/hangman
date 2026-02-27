@@ -1,4 +1,5 @@
 class SecretMaker
+  attr_reader :secret_word
   
   def initialize
     raw_word_list = File.readlines("words.txt")
@@ -10,7 +11,6 @@ class SecretMaker
       word.length >= 6
     end
     @secret_word = word_bank.sample
-    p @secret_word
   end
 
 end
