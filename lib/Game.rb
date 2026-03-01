@@ -11,25 +11,55 @@ class Game
     @secret_word = @secret_maker.secret_word
     p @secret_word
     @current_board = Array.new(@secret_word.length, "_")
+    @history = []
+    @current_lives = 5
   end
   def turn_loop
     #display the board so player knows word length  
     loop do 
-      @input_handler.get_guess
-      
-      
-    end
+      @current_guess = @input_handler.get_guess
+
+      while @history.include?(@current_guess)
+        puts "You already guessed that letter. Try again."
+        @current_guess =@input_handler.get_guess
+      end
+
+      @history << @current_guess
+
+      if @secret_word.include?(@current_guess)
+        puts "Nice"
+        @secret_word.each_char.with_index do |char, index|
+          if char == @current_guess
+            @current_board[index] = @current_guess
+          end
+        end
+      else @current_lives -= 1            
+      end  
+
+      if @current_lives == 0 
+        #display call goes here
+        puts "game over"
+        break
+      end
+
+      if @current_board.join == @secret_word
+        #display call goes here]
+        puts "You win!"
+        break
+      end
+
+
+      #this is just for debugging 
+      puts "end of round. Results"
+      p @history
+      p @current_lives
+      p @current_board
+
+    end  
   end
+
+  def play
+    turn_loop
+  end
+
 end
-
-
-#game loop
-#
-#get guess
-#(after round 1) compare it to history and throw error if repeat call get guess again
-#add the letter guess to the history array. 
-#compare it to secret
-#if it does not appear in secret -1 life
-#if it does appear in secret do WHAT!?!?!!?!
-#
-#Toward the end of the loop if lives = 0 have display, game over. Break
