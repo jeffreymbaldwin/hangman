@@ -86,7 +86,10 @@ class Display
     end
     puts "-" * BOARD_WIDTH
   end
-
+  def display_current_board (current_board)
+    puts current_board.join(" ")
+    puts
+  end
   def win_message
     puts "*****Congrats! You win!*****"
   end

@@ -18,6 +18,7 @@ class Game
   def turn_loop
     @display.display_lives(@current_lives)
     @display.display_hangman(@current_lives)
+    @display.display_current_board(@current_board)
     loop do 
       @current_guess = @input_handler.get_guess
 
