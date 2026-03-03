@@ -8,14 +8,16 @@ class Game
   def initialize 
     @input_handler = InputHandler.new
     @secret_maker = SecretMaker.new
+    @display = Display.new
     @secret_word = @secret_maker.secret_word
     p @secret_word
     @current_board = Array.new(@secret_word.length, "_")
     @history = []
-    @current_lives = 5
+    @current_lives = 6
   end
   def turn_loop
-    #display the board so player knows word length  
+    @display.display_lives(@current_lives)
+    @display.display_hangman(@current_lives)
     loop do 
       @current_guess = @input_handler.get_guess
 
@@ -37,14 +39,12 @@ class Game
       end  
 
       if @current_lives == 0 
-        #display call goes here
-        puts "game over"
+        @display.lose_message
         break
       end
 
       if @current_board.join == @secret_word
-        #display call goes here]
-        puts "You win!"
+        @display.win_message
         break
       end
 
