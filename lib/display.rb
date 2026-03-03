@@ -97,7 +97,7 @@ class Display
     puts history.join(" ")
   end
 
-  def display_UI(lives, current_board, history)
+  def display_ui(lives, current_board, history)
 
     display_lives(lives)
     display_hangman(lives)

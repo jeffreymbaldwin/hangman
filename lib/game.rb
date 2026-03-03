@@ -1,6 +1,6 @@
-require_relative 'Display'
-require_relative 'InputHandler'
-require_relative 'SecretMaker'
+require_relative 'display'
+require_relative 'input_handler'
+require_relative 'secret_maker'
 
 
 class Game
@@ -16,7 +16,7 @@ class Game
   end
 
   def turn_loop
-    @display.display_UI(@current_lives, @current_board, @history,)
+    @display.display_ui(@current_lives, @current_board, @history)
     
     loop do 
       @current_guess = @input_handler.get_guess
@@ -37,7 +37,7 @@ class Game
       else @current_lives -= 1            
       end  
 
-      @display.display_UI(@current_lives, @current_board, @history)
+      @display.display_ui(@current_lives, @current_board, @history)
 
       if @current_lives == 0 
         @display.lose_message
