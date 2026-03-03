@@ -14,5 +14,3 @@ class SecretMaker
   end
 
 end
-
-
