@@ -86,10 +86,26 @@ class Display
     end
     puts "-" * BOARD_WIDTH
   end
+
   def display_current_board (current_board)
     puts current_board.join(" ")
     puts
   end
+
+  def display_history(history)
+    puts "**GUESSES**"
+    puts history.join(" ")
+  end
+
+  def display_UI(lives, current_board, history)
+
+    display_lives(lives)
+    display_hangman(lives)
+    display_current_board (current_board)
+    display_history (history) 
+
+  end
+
   def win_message
     puts "*****Congrats! You win!*****"
   end

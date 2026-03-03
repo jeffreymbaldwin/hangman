@@ -10,15 +10,14 @@ class Game
     @secret_maker = SecretMaker.new
     @display = Display.new
     @secret_word = @secret_maker.secret_word
-    p @secret_word
     @current_board = Array.new(@secret_word.length, "_")
     @history = []
     @current_lives = 6
   end
+
   def turn_loop
-    @display.display_lives(@current_lives)
-    @display.display_hangman(@current_lives)
-    @display.display_current_board(@current_board)
+    @display.display_UI(@current_lives, @current_board, @history,)
+    
     loop do 
       @current_guess = @input_handler.get_guess
 
@@ -30,7 +29,6 @@ class Game
       @history << @current_guess
 
       if @secret_word.include?(@current_guess)
-        puts "Nice"
         @secret_word.each_char.with_index do |char, index|
           if char == @current_guess
             @current_board[index] = @current_guess
@@ -38,6 +36,8 @@ class Game
         end
       else @current_lives -= 1            
       end  
+
+      @display.display_UI(@current_lives, @current_board, @history)
 
       if @current_lives == 0 
         @display.lose_message
@@ -48,14 +48,6 @@ class Game
         @display.win_message
         break
       end
-
-
-      #this is just for debugging 
-      puts "end of round. Results"
-      p @history
-      p @current_lives
-      p @current_board
-
     end  
   end
 
