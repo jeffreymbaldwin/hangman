@@ -1,6 +1,7 @@
 require_relative 'display'
 require_relative 'input_handler'
 require_relative 'secret_maker'
+require_relative 'save_manager'
 
 
 class Game
@@ -9,6 +10,7 @@ class Game
     @input_handler = InputHandler.new
     @secret_maker = SecretMaker.new
     @display = Display.new
+    @save_manager = SaveManager.new
     @secret_word = @secret_maker.secret_word
     @current_board = Array.new(@secret_word.length, "_")
     @history = []
@@ -17,13 +19,15 @@ class Game
 
   def turn_loop
     @display.display_ui(@current_lives, @current_board, @history)
-    
+
     loop do 
       @current_guess = @input_handler.get_guess
+      break if save_check(@current_guess)
 
       while @history.include?(@current_guess)
         puts "You already guessed that letter. Try again."
         @current_guess =@input_handler.get_guess
+        return if save_check(@current_guess)
       end
 
       @history << @current_guess
@@ -53,6 +57,29 @@ class Game
 
   def play
     turn_loop
+  end
+
+  def game_state
+    {
+      secret_word: @secret_word,
+      current_board: @current_board,
+      history: @history,
+      current_lives: @current_lives
+    }
+  end
+
+  def save_game
+    @save_manager.save(game_state)
+    puts "Game saved."
+  end
+
+  def save_check(guess)
+   if guess == :save
+     save_game
+     true
+   else
+    false
+   end
   end
 
 end

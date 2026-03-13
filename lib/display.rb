@@ -76,7 +76,7 @@ class Display
 
   
   def display_lives(lives)
-    puts "♥ clcLives: #{lives}".center(BOARD_WIDTH)
+    puts "♥ Lives: #{lives}".center(BOARD_WIDTH)
   end
 
   def display_hangman(lives)
