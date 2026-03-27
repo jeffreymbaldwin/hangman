@@ -6,16 +6,29 @@ require_relative 'save_manager'
 
 class Game
 
-  def initialize 
+  def initialize
     @input_handler = InputHandler.new
-    @secret_maker = SecretMaker.new
     @display = Display.new
     @save_manager = SaveManager.new
-    @secret_word = @secret_maker.secret_word
-    @current_board = Array.new(@secret_word.length, "_")
-    @history = []
-    @current_lives = 6
   end
+
+  def play
+    puts "To start a new game, type N. To load the previous save type L"
+    input = gets.chomp.downcase
+    until ["l", "n"].include?(input)
+      puts "Invalid input.
+To start a new game, type N. To load the previous save type L"
+      input = gets.chomp.downcase
+    end
+  end
+
+  def setup_new_game
+    secret_maker = SecretMaker.new
+    @secret_word = secret_maker.secret_word
+    @current_board = Array.new(@secret_word.length, "_")
+    @history =[]
+  end
+
 
   def turn_loop
     @display.display_ui(@current_lives, @current_board, @history)
@@ -38,7 +51,8 @@ class Game
             @current_board[index] = @current_guess
           end
         end
-      else @current_lives -= 1            
+      else 
+        @current_lives -= 1            
       end  
 
       @display.display_ui(@current_lives, @current_board, @history)
@@ -53,10 +67,6 @@ class Game
         break
       end
     end  
-  end
-
-  def play
-    turn_loop
   end
 
   def game_state
