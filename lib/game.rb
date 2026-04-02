@@ -13,12 +13,27 @@ class Game
   end
 
   def play
-    puts "To start a new game, type N. To load the previous save type L"
+    puts "To start a new game, type N. To load the previous save type L.
+**WARNING** A save file is deleted once it has been sucessfully loaded.
+Be sure to save the game again before quiting."
     input = gets.chomp.downcase
     until ["l", "n"].include?(input)
       puts "Invalid input.
-To start a new game, type N. To load the previous save type L"
+To start a new game, type N. To load the previous save type L.
+**WARNING** A save file is deleted once it has been sucessfully loaded.
+Be sure to save the game again before quiting a loaded game."
       input = gets.chomp.downcase
+    end
+    if input == "n"
+      setup_new_game
+      turn_loop
+    elsif input == "l"
+      if @save_manager.save_exists?
+        setup_loaded_game
+        turn_loop
+      else
+        puts "No save found"
+      end
     end
   end
 
@@ -26,8 +41,21 @@ To start a new game, type N. To load the previous save type L"
     secret_maker = SecretMaker.new
     @secret_word = secret_maker.secret_word
     @current_board = Array.new(@secret_word.length, "_")
-    @history =[]
+    @history = []
+    @current_lives = 6
   end
+
+  def setup_loaded_game
+    data = @save_manager.load
+    @secret_word = data[:secret_word]
+    @current_board = data[:current_board]
+    @history = data[:history]
+    @current_lives = data[:current_lives]
+    puts "Save File Loaded"
+    @save_manager.delete_save
+    puts "Save files can only be loaded once, so the data has been deleted."
+  end
+
 
 
   def turn_loop
