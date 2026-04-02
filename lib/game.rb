@@ -15,13 +15,13 @@ class Game
   def play
     puts "To start a new game, type N. To load the previous save type L.
 **WARNING** A save file is deleted once it has been sucessfully loaded.
-Be sure to save the game again before quiting."
+Be sure to save the game again before quitting."
     input = gets.chomp.downcase
     until ["l", "n"].include?(input)
       puts "Invalid input.
 To start a new game, type N. To load the previous save type L.
 **WARNING** A save file is deleted once it has been sucessfully loaded.
-Be sure to save the game again before quiting a loaded game."
+Be sure to save the game again before quitting a loaded game."
       input = gets.chomp.downcase
     end
     if input == "n"
@@ -32,7 +32,21 @@ Be sure to save the game again before quiting a loaded game."
         setup_loaded_game
         turn_loop
       else
-        puts "No save found"
+        puts "No save found
+Would you like to start a new game? Yes or no?"
+        input = gets.chomp.downcase
+        until ["yes", "no"].include?(input)
+          puts "Invalid input."
+          puts "No save found
+Would you like to start a new game? Yes or no?"
+          input = gets.chomp.downcase
+        end
+        if input == "yes"
+          setup_new_game
+          turn_loop
+        elsif input == "no"
+          puts "Fair enough. Have a nice day. Closing the program."
+        end
       end
     end
   end
@@ -67,7 +81,7 @@ Be sure to save the game again before quiting a loaded game."
 
       while @history.include?(@current_guess)
         puts "You already guessed that letter. Try again."
-        @current_guess =@input_handler.get_guess
+        @current_guess = @input_handler.get_guess
         return if save_check(@current_guess)
       end
 
