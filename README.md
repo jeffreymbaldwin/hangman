@@ -48,3 +48,9 @@ Enter your 1 letter guess. Type SAVE to save the game.
 
 ```
 
+## What I learned
+
+- How to serialize and deserialize a game state using YAML
+- How to structure a program so state can be save and restored
+- How to handle edge cases such as loading when no save file exists
+- OOP principles and how they relate to serialization
