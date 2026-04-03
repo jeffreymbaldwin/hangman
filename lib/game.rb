@@ -13,16 +13,16 @@ class Game
   end
 
   def play
-    puts "To start a new game, type N. To load the previous save type L.
-**WARNING** A save file is deleted once it has been sucessfully loaded.
-Be sure to save the game again before quitting."
+    puts "To start a new game, type N. To load the previous save type L."
+    puts "**WARNING** A save file is deleted once it has been sucessfully loaded."
+    puts "Be sure to save the game again before quitting."
     input = gets.chomp.downcase
     until ["l", "n"].include?(input)
-      puts "Invalid input.
-To start a new game, type N. To load the previous save type L.
-**WARNING** A save file is deleted once it has been sucessfully loaded.
-Be sure to save the game again before quitting a loaded game."
-      input = gets.chomp.downcase
+    puts "Invalid input."
+    puts "To start a new game, type N. To load the previous save type L."
+    puts "**WARNING** A save file is deleted once it has been sucessfully loaded."
+    puts "Be sure to save the game again before quitting a loaded game."
+    input = gets.chomp.downcase
     end
     if input == "n"
       setup_new_game
@@ -32,13 +32,13 @@ Be sure to save the game again before quitting a loaded game."
         setup_loaded_game
         turn_loop
       else
-        puts "No save found
-Would you like to start a new game? Yes or no?"
+        puts "No save found"
+        puts "Would you like to start a new game? Yes or no?"
         input = gets.chomp.downcase
         until ["yes", "no"].include?(input)
           puts "Invalid input."
-          puts "No save found
-Would you like to start a new game? Yes or no?"
+          puts "No save found"
+          puts "Would you like to start a new game? Yes or no?"
           input = gets.chomp.downcase
         end
         if input == "yes"
