@@ -1,14 +1,14 @@
 # hangman
 
-A command-line Hangman game built in Ruby to practice serialization (saving and loading).
+A command-line Hangman game built in Ruby to practice serialization (saving and loading a game state).
 
 ## Description
 
-A command-line implementation of Hangman written in Ruby. The secret word is automatically generated at the start of the game. You have 6 lives to try and guess the word before a game over. You can save the game at the start of each turn. After loading a save data to resume playing, the save data is deleted to prevent reusing the same save state. You can only have one save state at a time. 
+A command-line implementation of Hangman written in Ruby. The secret word is automatically generated at the start of the game. You have 6 lives to try and guess the word before a game over. You can save the game at the start of each turn. After loading, the save file is deleted to prevnet reusing the same game state. You can only have one save state at a time. 
 
 ## Purpose
 
-This project was built to practice serialization in Ruby using YAML. The game state (secret word, guessed letters, remaining lives and board state) is converted into a storable format and written to a file, then later reconstructed to resume gameplay. 
+This project was built to practice serialization in Ruby using YAML. The game state (secret word, guessed letters, remaining lives and board state) is converted into a YAML format and written to a file, then later reconstructed to resume gameplay. 
 
 ## How to run
 
@@ -21,6 +21,7 @@ ruby game.rb
 - Enter "n" or "l" to start a new game or load a save data. 
 - Enter your guess one letter at a time. 
 - The game board will reload to reflect your guess.
+- Type "save" during a turn to save the current save state.
 - You have 6 lives. 
 - The game ends when you correctly guess the secret word or run out of lives. 
 
